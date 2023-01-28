@@ -1,6 +1,6 @@
 #******************************************************************************
 #
-# Makefile - Rules for building the blinky example.
+# Makefile - Rules for building the Project Zero Example.
 #
 # Copyright (c) 2012-2014 Texas Instruments Incorporated.  All rights reserved.
 # Software License Agreement
@@ -35,18 +35,25 @@ ROOT=../../..
 #
 # Include the common make definitions.
 #
-include ${ROOT}/makedefs
+include makedefs
+
+#
+# Where to find source files that do not live in this directory.
+#
+VPATH=../drivers
+VPATH+=../../../utils
 
 #
 # Where to find header files that do not live in the source directory.
 #
-IPATH=../../..
+IPATH=..
+IPATH+=../../..
 
 #
-# The default rule, which causes the blinky example to be built.
+# The default rule, which causes the Project Zero Example to be built.
 #
 all: ${COMPILER}
-all: ${COMPILER}/blinky.axf
+all: ${COMPILER}/main.axf
 
 #
 # The rule to build project with debug support.
@@ -54,7 +61,7 @@ all: ${COMPILER}/blinky.axf
 
 debug: CFLAGS+=-g -D DEBUG
 debug: ${COMPILER}
-debug: ${COMPILER}/blinky.axf
+debug: ${COMPILER}/main.axf
 
 #
 # The rule to clean out all the build products.
@@ -69,13 +76,17 @@ ${COMPILER}:
 	@mkdir -p ${COMPILER}
 
 #
-# Rules for building the blinky example.
+# Rules for building the Project Zero Example.
 #
-${COMPILER}/blinky.axf: ${COMPILER}/blinky.o
-${COMPILER}/blinky.axf: ${COMPILER}/startup_${COMPILER}.o
-${COMPILER}/blinky.axf: blinky.ld
-SCATTERgcc_blinky=blinky.ld
-ENTRY_blinky=ResetISR
+${COMPILER}/main.axf: ${COMPILER}/main.o
+${COMPILER}/main.axf: ${COMPILER}/startup_${COMPILER}.o
+${COMPILER}/main.axf: ${COMPILER}/GPIO.o
+${COMPILER}/main.axf: ${COMPILER}/PLL.o
+${COMPILER}/main.axf: ${COMPILER}/SysTick_Init.o
+${COMPILER}/main.axf: main.ld
+SCATTERgcc_main=main.ld
+ENTRY_main=ResetISR
+CFLAGSgcc=-DTARGET_IS_TM4C123_RB1
 
 #
 # Include the automatically generated dependency files.
