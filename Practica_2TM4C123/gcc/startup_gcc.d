@@ -6,4 +6,4 @@ gcc/startup_gcc.o: startup_gcc.c \
  c:\program\ files\ (x86)\gnu\ arm\ embedded\ toolchain\10\ 2021.10\arm-none-eabi\include\_newlib_version.h \
  c:\program\ files\ (x86)\gnu\ arm\ embedded\ toolchain\10\ 2021.10\arm-none-eabi\include\sys\_intsup.h \
  c:\program\ files\ (x86)\gnu\ arm\ embedded\ toolchain\10\ 2021.10\arm-none-eabi\include\sys\_stdint.h \
- ../../../inc/hw_nvic.h ../../../inc/hw_types.h
+ lib/hw_nvic.h lib/hw_types.h
